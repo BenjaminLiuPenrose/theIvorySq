@@ -15,7 +15,7 @@ from pdfminer.pdfpage import PDFPage
 import os
 import openai
 openai.api_key = "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"
-"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"
+"sk-ZaZvowWwFV6nZywJjINDT3BlbkFJrNm9hAFVq47gKIpc1LHNqyy"
 
 def extract_text_from_pdf(pdf_path):
     resource_manager = PDFResourceManager()
