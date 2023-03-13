@@ -83,3 +83,20 @@ generated_text = generate_text(prompt)
 print(generated_text["choices"][0]["message"]["content"])
 
 print(generated_text)
+
+doc1 = "Research Professional, monetary economics, macroeconomics, finance, global survey, inflation expectations, quantitative background, programming skills, writing skills, independent problem solving, research in economics and finance."
+doc2= "Research Professional, data collection, database maintenance, statistical analysis, policy-relevant topics, monetary economics, macroeconomics, finance, global survey, inflation expectations, quantitative background, programming skills, writing skills, independent problem-solving, long-term interest in economics and finance research, annual salary of $55,000, health insurance, equal employment opportunities"
+corpus = [doc1, doc2]
+from gensim.models.doc2vec import Doc2Vec, TaggedDocument
+from scipy.spatial.distance import cosine
+
+documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(corpus)]
+model = Doc2Vec(documents, vector_size=100, window=5, min_count=5, workers=4)
+def similarity(model, doc1, doc2):
+    vec1 = model.infer_vector(doc1.split())
+    vec2 = model.infer_vector(doc2.split())
+    similarity = cosine(vec1, vec2)
+    return similarity
+
+
+print(similarity(model, doc1, doc2) )
